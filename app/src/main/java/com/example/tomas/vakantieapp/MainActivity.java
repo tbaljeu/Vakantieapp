@@ -49,57 +49,57 @@ public class MainActivity extends AppCompatActivity  implements SchoolVakantieTa
        String[] urls = new String[]
                {};
        task.execute(urls);
-/**
+
         // #tijdvak 1,2,3 dummies
-        Tijdvak tv1 = new Tijdvak();
-        Tijdvak tv2 = new Tijdvak();
-        Tijdvak tv3 = new Tijdvak();
+//        Tijdvak tv1 = new Tijdvak();
+//        Tijdvak tv2 = new Tijdvak();
+//        Tijdvak tv3 = new Tijdvak();
+//
+//        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+//        try {
+//            tv1.startdate = dateFormat.parse("2015-10-16T22:00:00.000Z");
+//            tv1.enddate = dateFormat.parse("2015-11-16T22:00:00.000Z");
+//            tv1.region = "zuid";
+//            tijdvak.add(tv1);
+//            tv2.startdate = dateFormat.parse("2016-12-16T22:00:00.000Z");
+//            tv2.enddate = dateFormat.parse("2017-01-16T22:00:00.000Z");
+//            tv2.region = "zuid";
+//            tijdvak.add(tv2);
+//            tv3.startdate = dateFormat.parse("2017-11-16T22:00:00.000Z");
+//            tv3.enddate = dateFormat.parse("2018-04-16T22:00:00.000Z");
+//            tv3.region = "Noord";
+//            tijdvak.add(tv3);
+//        } catch (ParseException ex) {
+//            Log.e(TAG, ex.getLocalizedMessage());
+//        }
+//
+//        VakantieItem vak1 = new VakantieItem();
+//        vak1.name = "Voorjaarsvakantie";
+//        vak1.compulsorydates = true;
+//        vak1.tijdvak.add(tv1);
+//        schoolvakanties.add(vak1);
+//
+//        VakantieItem vak2 = new VakantieItem();
+//        vak2.name = "Najaarsvakantie";
+//        vak2.compulsorydates = true;
+//        vak2.tijdvak.add(tv2);
+//        schoolvakanties.add(vak2);
+//
+//        VakantieItem vak3 = new VakantieItem();
+//        vak3.name = "Herfstvakantie";
+//        vak3.compulsorydates = true;
+//        vak3.tijdvak.add(tv3);
+//        schoolvakanties.add(vak3);
 
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
-        try {
-            tv1.startdate = dateFormat.parse("2015-10-16T22:00:00.000Z");
-            tv1.enddate = dateFormat.parse("2015-11-16T22:00:00.000Z");
-            tv1.region = "zuid";
-            tijdvak.add(tv1);
-            tv2.startdate = dateFormat.parse("2016-12-16T22:00:00.000Z");
-            tv2.enddate = dateFormat.parse("2017-01-16T22:00:00.000Z");
-            tv2.region = "zuid";
-            tijdvak.add(tv2);
-            tv3.startdate = dateFormat.parse("2017-11-16T22:00:00.000Z");
-            tv3.enddate = dateFormat.parse("2018-04-16T22:00:00.000Z");
-            tv3.region = "Noord";
-            tijdvak.add(tv3);
-        } catch (ParseException ex) {
-            Log.e(TAG, ex.getLocalizedMessage());
-        }
-
-        VakantieItem vak1 = new VakantieItem();
-        vak1.name = "Voorjaarsvakantie";
-        vak1.compulsorydates = true;
-        vak1.tijdvak.add(tv1);
-        schoolvakanties.add(vak1);
-
-        VakantieItem vak2 = new VakantieItem();
-        vak2.name = "Najaarsvakantie";
-        vak2.compulsorydates = true;
-        vak2.tijdvak.add(tv2);
-        schoolvakanties.add(vak2);
-
-        VakantieItem vak3 = new VakantieItem();
-        vak3.name = "Herfstvakantie";
-        vak3.compulsorydates = true;
-        vak3.tijdvak.add(tv3);
-        schoolvakanties.add(vak3);
-**/
     }
     @Override
    public void onItemClick(AdapterView<?> parent, View view, int i, long l) {
 
         Intent intent = new Intent(getApplicationContext(), VakantieSpreiding.class);
         VakantieItem item = (VakantieItem) this.schoolvakanties.get(i);
-        Tijdvak vak =(Tijdvak) this.tijdvak.get(i);
-        intent.putExtra("schoolvakantieitem", item);
+        Tijdvak vak = (Tijdvak) this.tijdvak.get(i);
         intent.putExtra("Tijdvakken",vak);
+        intent.putExtra("schoolvakantieitem", item);
         startActivity(intent);
     }
 

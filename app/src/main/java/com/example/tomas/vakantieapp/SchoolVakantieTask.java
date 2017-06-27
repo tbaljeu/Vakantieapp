@@ -3,16 +3,20 @@ package com.example.tomas.vakantieapp;
 import android.os.AsyncTask;
 import android.util.Log;
 
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
+import java.net.Proxy;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
@@ -89,35 +93,26 @@ public class SchoolVakantieTask  extends AsyncTask<String, Void, String> {
             // Top level json object
             jsonObject = new JSONObject(response);
 
-            // Get all users and start looping
-            JSONArray vakanties = jsonObject.getJSONArray("content");
 
+            JSONArray vakanties = jsonObject.getJSONArray("content");
             JSONArray vacations  = vakanties.getJSONObject(0).getJSONArray("vacations");
 
-            for(int idx = 0; idx < vacations.length(); idx++) {
+            for(int i = 0; i < vacations.length(); i++) {
 
+                Tijdvak tijdvak1 = new Tijdvak();
 
+                VakantieItem vakantie1 = new VakantieItem();
 
-                JSONObject vakantie = vacations.getJSONObject(idx);
+                JSONArray regios = vacations.getJSONObject(i).getJSONArray("regions");
 
-                String name = vakantie.getString("type");
+              JSONObject VakantieObject = vacations.getJSONObject(i);
 
-
-                JSONArray jarray =vakantie.getJSONArray ("regions");
-
-
-
-
-                VakantieItem p = new VakantieItem();
-                p.setName(name);
-
-
-
-
+                vakantie1.name = VakantieObject.getString("type");
+               // tijdvak1.region= VakantieObject.getString("region");
 
 
                 // Geef gevonden item terug via de call back
-                listener.onVakantieItemAvailable(p);
+                listener.onVakantieItemAvailable(vakantie1);
             }
         } catch( JSONException ex) {
             Log.e(TAG, "onPostExecute JSONException " + ex.getLocalizedMessage());
@@ -157,7 +152,7 @@ public class SchoolVakantieTask  extends AsyncTask<String, Void, String> {
 
     // Call back interface
     interface onVakantieItemAvailable {
-        void onVakantieItemAvailable(VakantieItem item);
+        void onVakantieItemAvailable(VakantieItem vakantie1);
     }
 
 

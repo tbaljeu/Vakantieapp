@@ -45,10 +45,10 @@ public class MainActivity extends AppCompatActivity  implements SchoolVakantieTa
 
         mVakantieAdapter.notifyDataSetChanged();
 
-        SchoolVakantieTask task = new SchoolVakantieTask(this);
-        String[] urls = new String[]
-                {};
-        task.execute(urls);
+       SchoolVakantieTask task = new SchoolVakantieTask(this);
+       String[] urls = new String[]
+               {};
+       task.execute(urls);
 /**
         // #tijdvak 1,2,3 dummies
         Tijdvak tv1 = new Tijdvak();

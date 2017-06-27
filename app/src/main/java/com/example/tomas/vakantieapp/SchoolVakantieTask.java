@@ -15,6 +15,8 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Created by Tomas on 26-6-2017.
@@ -88,23 +90,34 @@ public class SchoolVakantieTask  extends AsyncTask<String, Void, String> {
             jsonObject = new JSONObject(response);
 
             // Get all users and start looping
-            JSONArray vakanties = jsonObject.getJSONObject("vakanties").getJSONArray("items");
+            JSONArray vakanties = jsonObject.getJSONArray("content");
 
-            for(int idx = 0; idx < vakanties.length(); idx++ )
-            {
-                // New Vakantie item
-                VakantieItem item = new VakantieItem();
+            JSONArray vacations  = vakanties.getJSONObject(0).getJSONArray("vacations");
 
-                // Haal de vakantienaam uit de JSON
-                String name = vakanties.getJSONObject(idx).getString("type");
-                item.setName(name);
+            for(int idx = 0; idx < vacations.length(); idx++) {
 
-//                String id = vakanties.getJSONObject(idx).getString("id");
-//                item.setSpotifyId(id);
+
+
+                JSONObject vakantie = vacations.getJSONObject(idx);
+
+                String name = vakantie.getString("type");
+
+
+                JSONArray jarray =vakantie.getJSONArray ("regions");
+
+
+
+
+                VakantieItem p = new VakantieItem();
+                p.setName(name);
+
+
+
+
 
 
                 // Geef gevonden item terug via de call back
-                listener.onVakantieItemAvailable(item);
+                listener.onVakantieItemAvailable(p);
             }
         } catch( JSONException ex) {
             Log.e(TAG, "onPostExecute JSONException " + ex.getLocalizedMessage());
